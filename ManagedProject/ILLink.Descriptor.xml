@@ -1,0 +1,7 @@
+<linker>
+  <assembly fullname="ManagedProject">
+    <type fullname="ManagedProject.Program">
+      <method name="SayHello" />
+    </type>
+  </assembly>
+</linker>

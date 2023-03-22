@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net8.0</TargetFramework>    
+    <SelfContained>true</SelfContained>
+    <NativeLib>shared</NativeLib>
+    <RunAOTCompilation>true</RunAOTCompilation>
+    <ForceFullAOT>true</ForceFullAOT>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <!-- Preserves the UnmanagedCallersOnly method -->
+    <TrimmerRootDescriptor Include="$(MSBuildThisFileDirectory)ILLink.Descriptor.xml" />
+  </ItemGroup>
+</Project>
