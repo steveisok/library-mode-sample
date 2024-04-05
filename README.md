@@ -6,19 +6,15 @@ This repo contains a sample illustrating how to generate shared or static librar
 
 ### Install nightly dotnet sdk
 
-The library mode feature has not made it into any publically available preview, so you'll have to pull from a nightly SDK. Pick from the `main (8.0.x) runtime` column. If you want to support iOS and android, you'll need to pick an OSX based SDK.
+Grab a .NET 9 preview and install it
 
 https://github.com/dotnet/installer#table
 
-### Install the experimental workload
+### Install the workload
 
-Since library mode is still being refined, we made it available in an optional workload. Before you install, you need to make sure you have the net8 feed in a NuGet.config. 
+Install the workload that contains the tooling to support library mode for iOS and Android via:
 
-Net8 Feed: https://pkgs.dev.azure.com/dnceng/public/_packaging/dotnet8/nuget/v3/index.json
-
-The command to install the workload is:
-
-`dotnet workload install mobile-librarybuilder-experimental`
+`dotnet workload install mobile-librarybuilder`
 
 ### Install the Android SDK / NDK
 
@@ -89,11 +85,11 @@ iOS and Android are self-contained configurations and therefore, `dotnet publish
 
 ## Packaging and Using the Libraries
 
-We currently do not bundle the managed assemblies into the library like nativeaot does. That is in our backlog and will come later in the .NET 8 cycle. Until then, you need to not only pull in the native library, but deploy your app with the managed assemblies as well.  
+We currently do not bundle the managed assemblies into the library like nativeaot does. It's unclear whether we will add better support.
 
 ### Assemblies
 
-The assemblies used to build the library are located in `bin/<Configuration>/net8.0/<ios|android>-<architecture>/publish`. Add them to your native project and make sure they are accessible on disk. By default, they are not directly accessible on Android, so you will need to do something such as zip the contents and then unzip at runtime.
+The assemblies used to build the library are located in `bin/<Configuration>/net<version>/<ios|android>-<architecture>/publish`. Add them to your native project and make sure they are accessible on disk. By default, they are not directly accessible on Android, so you will need to do something such as zip the contents and then unzip at runtime.
 
 They can be in any location on disk, but you need to tell the runtime where they are located by setting the `DOTNET_LIBRARY_ASSEMBLY_PATH` environment variable.
 
